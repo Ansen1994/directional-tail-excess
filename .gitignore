@@ -1,0 +1,36 @@
+# Data and outputs are never committed.
+data/
+results/
+literature/
+manuscript/
+logs/
+tmp/
+output/
+
+# Large or generated artefacts
+*.pdf
+*.docx
+*.png
+*.rds
+*.h5ad
+*.h5
+*.tar
+*.gz
+*.zip
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini

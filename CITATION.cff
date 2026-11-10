@@ -1,0 +1,42 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the manuscript below and, once available, the archived release of this repository."
+title: "directional-tail-excess: a distribution-level test separating subpopulation selection from a population-wide state transition"
+abstract: >-
+  Analysis code for a distribution-level test of paired single-cell transcriptomes.
+  For every patient, programme and interval, quantiles of a programme score are measured
+  before and after treatment and normalised by the baseline interquartile range. The
+  signed trailing-end excess separates a subpopulation selection event, which moves one
+  end of the distribution, from a population-wide state transition, which moves every
+  quantile by the same amount. The pipeline produces all figures and numbers of the
+  accompanying manuscript across three independent neoadjuvant breast cancer cohorts.
+type: software
+authors:
+  - family-names: Xu
+    given-names: Ansheng
+    affiliation: "Department of Breast and Thyroid Surgery, The Second Affiliated Hospital of Chongqing Medical University, Chongqing, China"
+  - family-names: Chen
+    given-names: Cheng
+    affiliation: "Department of Breast and Thyroid Surgery, The Second Affiliated Hospital of Chongqing Medical University, Chongqing, China"
+  - family-names: Yin
+    given-names: Guobing
+    affiliation: "Department of Breast and Thyroid Surgery, The Second Affiliated Hospital of Chongqing Medical University, Chongqing, China"
+  - family-names: Luo
+    given-names: Jing
+    orcid: "https://orcid.org/0009-0007-5465-8122"
+    affiliation: "Department of Pathology, College of Basic Medicine, Chongqing Medical University, Chongqing, China"
+repository-code: "https://github.com/Ansen1994/directional-tail-excess"
+license: MIT
+version: 1.0.0
+date-released: "2026-11-10"
+keywords:
+  - single-cell transcriptomics
+  - distribution shape
+  - quantile comparison
+  - subpopulation selection
+  - phenotypic plasticity
+  - breast cancer
+  - neoadjuvant therapy
+identifiers:
+  - type: url
+    value: "https://github.com/Ansen1994/directional-tail-excess"
+    description: "Source repository"
