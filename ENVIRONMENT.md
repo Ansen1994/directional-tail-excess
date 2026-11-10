@@ -37,11 +37,22 @@ in `py/16_fig2_bulk.py`.
 
 ## Dependency record
 
-No `renv.lock` is shipped, because the pipeline was run as a sequence of independent R
-processes rather than against a single locked library. The equivalent record is produced by
-the runner: `R/00_run_all.R` writes **`logs/sessionInfo_<tag>.txt`** after every step, so a
-full run generates one `sessionInfo()` per analysis stage. Those files are the authoritative
-record of what each figure was produced with.
+No `renv.lock` is shipped. The pipeline was run as a sequence of independent R processes
+rather than against a single locked library, so a lockfile generated after the fact from the
+current global library would not be an honest record of the versions that produced the
+figures; we do not fabricate one. The versions tabulated above were transcribed from the
+`sessionInfo()` outputs of those runs and match the versions stated in the manuscript.
+
+**Shipped records.** `logs/sessionInfo_<tag>.txt` holds the nine `sessionInfo()` files that
+were actually written during the early preprocessing stages (tags `01_qc`, `01b_labels`,
+`03_annotate`, `04_doublets`, `05_cnv`, `06_epi`, `07_nmf`, `08_diag`, `09_ps_nmf`).
+Run logs (`*.log`) are not shipped.
+
+**Not shipped.** Steps `21`–`42` (shape, counterfactual, clone-layer and figure analyses)
+were run as separate R processes at different times, and their per-step `sessionInfo()`
+files were not archived. A full reproduction generates them: `R/00_run_all.R` writes
+`logs/sessionInfo_<tag>.txt` and `logs/run_<tag>.log` after each step. The cell-level input
+tables needed to start that run are likewise not shipped (see [README](README.md#data)).
 
 ## Conventions that must not drift
 

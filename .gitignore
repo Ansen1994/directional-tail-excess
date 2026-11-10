@@ -3,7 +3,9 @@ data/
 results/
 literature/
 manuscript/
-logs/
+# Ship the real sessionInfo records, not the run logs.
+logs/*
+!logs/sessionInfo_*.txt
 tmp/
 output/
 

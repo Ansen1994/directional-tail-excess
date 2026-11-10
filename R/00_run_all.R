@@ -13,8 +13,8 @@
 # 为什么 R/28 出现两次：
 #   R/28 画 Fig 5D 时要读 R/39 落盘的 selection_counterfactual_paired.csv，
 #   而 R/39 要读 R/28 落盘的 nc2025_fig5_shape_calls.csv —— 两者互为输入。
-#   仓库自带这两个表，所以常规情况一次即可；若完全从零重建（tables 为空），
-#   第一遍 R/28 会在读反事实表处报错，属预期，跑完 R/39 再跑一遍即可。
+#   这两个表不随仓库分发（见 README 的 Data 段），须先按 py/README.md 生成；
+#   从零重建时第一遍 R/28 会在读反事实表处报错，属预期，跑完 R/39 再跑一遍即可。
 
 args <- commandArgs(trailingOnly = TRUE)
 dry  <- "--dry-run" %in% args
