@@ -1,5 +1,7 @@
 # directional-tail-excess
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24106083.svg)](https://doi.org/10.5281/zenodo.24106083)
+
 Analysis code for the manuscript:
 
 > **A distribution-level test separates subpopulation selection from a population-wide
@@ -145,9 +147,20 @@ only by that layer. They are kept for lineage; nothing in the manuscript depends
 
 ## Citation
 
-Citation metadata is in [`CITATION.cff`](CITATION.cff). Until the archived release exists,
-please cite the manuscript; after the first release, cite the **concept DOI**, which always
-resolves to the latest version.
+Citation metadata is in [`CITATION.cff`](CITATION.cff). If you use this code, please cite the
+manuscript and the archived release.
+
+**This version (v1.0.0)** — use this when you need to refer to exactly the code behind the
+manuscript:
+
+> Xu A, Chen C, Yin G, Luo J. *directional-tail-excess: a distribution-level test separating
+> subpopulation selection from a population-wide state transition* (v1.0.0). Zenodo. 2026.
+> doi:10.5281/zenodo.24106083
+
+**Concept DOI** — `10.5281/zenodo.24106082`. This always resolves to the latest release, so use
+it in a "code availability" statement that should stay valid as the repository is updated.
+
+Archived snapshot: <https://zenodo.org/records/24106083>
 
 ## License
 

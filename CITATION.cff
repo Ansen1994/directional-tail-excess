@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use this code, please cite the manuscript below and, once available, the archived release of this repository."
+message: "If you use this code, please cite the manuscript below and the archived release of this repository (doi:10.5281/zenodo.24106083)."
 title: "directional-tail-excess: a distribution-level test separating subpopulation selection from a population-wide state transition"
 abstract: >-
   Analysis code for a distribution-level test of paired single-cell transcriptomes.
@@ -28,6 +28,7 @@ repository-code: "https://github.com/Ansen1994/directional-tail-excess"
 license: MIT
 version: 1.0.0
 date-released: "2026-11-10"
+doi: "10.5281/zenodo.24106083"
 keywords:
   - single-cell transcriptomics
   - distribution shape
