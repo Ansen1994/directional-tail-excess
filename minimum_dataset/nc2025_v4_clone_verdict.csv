@@ -1,0 +1,8 @@
+patient,verdict,note
+01,baseline_homogeneous|separated_beyond_baseline|all_retained_same_direction|shift_exceeds_clonal_spread,主导 MP5（z50=+4.54），基线 5 克隆 / 随访 3 克隆，留存 3 个（升 3 降 0），分离度 +1.572（+3.88 IQR），克隆异质性 0.17 IQR，ICC=0.134
+09,baseline_heterogeneous|not_separated|all_retained_same_direction,主导 MP7（z50=+0.82），基线 6 克隆 / 随访 4 克隆，留存 4 个（升 4 降 0），分离度 -0.036（-0.07 IQR），克隆异质性 1.16 IQR，ICC=0.068
+12,no_subclone,基线 1273 个肿瘤细胞中 0 个被分配亚克隆（0 个克隆），SCEVAN 未能解析出可比较的亚克隆结构，仅做整体层面
+13,baseline_homogeneous|separated_beyond_baseline|all_retained_same_direction|shift_exceeds_clonal_spread,主导 MP3（z50=+0.90），基线 4 克隆 / 随访 3 克隆，留存 3 个（升 3 降 0），分离度 +0.150（+0.46 IQR），克隆异质性 0.37 IQR，ICC=0.006
+16,baseline_homogeneous|separated_beyond_baseline|all_retained_same_direction|shift_exceeds_clonal_spread,主导 MP3（z50=+7.33），基线 4 克隆 / 随访 2 克隆，留存 2 个（升 2 降 0），分离度 +0.880（+5.95 IQR），克隆异质性 0.37 IQR，ICC=0.286
+18,baseline_homogeneous|separated_beyond_baseline|all_retained_same_direction|shift_exceeds_clonal_spread,主导 MP9（z50=+1.26），基线 5 克隆 / 随访 3 克隆，留存 3 个（升 3 降 0），分离度 +0.458（+0.84 IQR），克隆异质性 0.49 IQR，ICC=0.013
+23,baseline_heterogeneous|separated_beyond_baseline|all_retained_same_direction|shift_exceeds_clonal_spread,主导 MP7（z50=+2.20），基线 6 克隆 / 随访 5 克隆，留存 5 个（升 5 降 0），分离度 +0.602（+1.35 IQR），克隆异质性 0.67 IQR，ICC=0.131

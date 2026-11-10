@@ -1,0 +1,8 @@
+patient,tp,rcb,arm,top_mp,top_z50,top_dq50,top_call,second_mp,second_z50,n_mp_abs_z50_gt05
+01,T3,favorable,Chemo,MP5,4.531,1.837,whole shift up,MP4,1.651,3
+09,T3,unfavorable,ICI,MP7,0.818,0.429,whole shift up,MP8,0.762,5
+12,T3,unfavorable,ICI,MP4,7.914,1.916,whole shift up,MP6,-0.449,1
+13,T3,unfavorable,Chemo,MP3,0.898,0.296,whole shift up,MP5,-0.638,2
+16,T4,unfavorable,Chemo,MP3,7.330,1.083,whole shift up,MP11,6.829,5
+18,T4,unfavorable,ICI,MP9,1.263,0.687,whole shift up,MP4,-0.859,3
+23,T2,unfavorable,ICI,MP7,2.196,0.981,whole shift up,MP6,1.955,2

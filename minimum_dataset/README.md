@@ -1,0 +1,108 @@
+# Minimum dataset (v1.0.1)
+
+These are the **derived input tables** needed to reproduce every figure and every number in
+the manuscript without applying for the controlled-access expression matrices. They ship
+with release **v1.0.1** of this repository and are part of the Zenodo archive
+(concept DOI `10.5281/zenodo.24106082`).
+
+## What is here, and what is not
+
+* **Here:** pseudonymous cell-level programme scores, per-cell CNV calls, per-patient
+  quantile/shape tables, clone-layer tables, permutation and threshold-scan summaries,
+  and the cross-cohort counterfactual tables. Columns are limited to study identifiers,
+  sample/timepoint labels, numeric scores, quantiles and derived statistics.
+* **Not here:** raw or processed expression matrices, read counts, TCR/BCR sequences,
+  gene-position annotation files, or any direct identifier (name, date of birth, medical
+  record number, contact detail). No table contains a clinical free-text field.
+* The underlying cohorts were obtained under controlled access (dbGaP `phs002419.v2`;
+  EGA `EGAS00001004809` / `EGAD00001006608`; EGA `EGAS50000001362`). These tables are
+  downstream derivatives of those matrices and are distributed here as the journal's
+  *minimum dataset*. Ethics approvals for the source studies are listed in the Methods
+  section of the manuscript.
+
+## Staging before a run
+
+The scripts read from `results/tables/` relative to the repository root. Copy the tables
+there once:
+
+```bash
+mkdir -p results/tables
+cp minimum_dataset/*.csv results/tables/
+Rscript R/00_run_all.R --dry-run
+Rscript R/00_run_all.R
+```
+
+`--dry-run` prints the 23-step plan without reading data. With the tables staged, every
+script in `R/21`–`R/42` that produces a figure or a reported statistic runs to completion.
+The two upstream cohort-3 steps
+`R/30`/`R/31` rebuild the CNV calls from `data/proc/neoletexe/cnv_profile.rds` and
+`gene_position.csv`; those two files require the controlled-access matrices and are not
+needed when `neoletexe_cnv_cells.csv` is taken as the starting point. `results/` remains a
+generated output directory and is intentionally not tracked.
+
+## File list (30)
+
+**Cohort 1 — cell-level and shape**
+
+| File | Role |
+|---|---|
+| `nc2025_fig2_cells.csv` | 65,206 cells x 9 programmes, long format; Fig. 2 and STable 2 |
+| `nc2025_v3_density.csv` | per-cell score distributions; Fig. 3–5, permutation, calibration |
+| `nc2025_v3_shape.csv` | per-patient x programme shape quantities; all call tables |
+| `nc2025_v3_dominant.csv` | dominant programme per timepoint |
+| `nc2025_v2_l1_trajectory.csv` | trajectory sensitivity (Fig. 4) |
+| `nc2025_v4_clone_cells.csv` | clone-layered per-cell scores |
+| `nc2025_v4_clone_layer.csv` | per-clone displacement with intervals |
+| `nc2025_v4_clone_summary.csv` | clone retention / drop-bias summary |
+| `nc2025_v4_clone_verdict.csv` | clone-level verdicts |
+| `nc2025_v4_composition_counterfactual.csv` | composition counterfactual (0.15% result) |
+| `nc2025_fig5_gradient.csv` | quantile gradients used by Fig. 6 |
+| `nc2025_fig5_shape_calls.csv` | 63-combination shape calls |
+| `nc2025_permutation_asym.csv` | label-permutation null (`p_asym`) |
+| `trailing_excess_threshold_scan.csv` | threshold sensitivity of the trailing excess |
+| `nc2025_fig1_cohort.csv` | cohort composition / RCB labels (Fig. 1) |
+| `nc2025_fig2_batch_delta.csv`, `nc2025_fig2_batch_effect.csv`, `nc2025_fig2_batch_map.csv` | batch-confounding checks (Fig. 2C–E) |
+| `nc2025_fig2_icc.csv`, `nc2025_fig2_pair_ks.csv`, `nc2025_fig2_pseudobulk_sim.csv`, `nc2025_fig2_sim_vs_ks.csv` | Fig. 2 validity inputs |
+
+**Cohort 2 — anti-PD1**
+
+| File | Role |
+|---|---|
+| `bassez_v2_cell_scores.csv` | cell-level programme scores |
+| `bassez_v2_profile.csv` | 145-combination quantile / shape table (cohort-2 scale caveat) |
+| `bassez_v2_gradient.csv` | quantile gradients |
+
+**Cohort 3 — aromatase inhibition**
+
+| File | Role |
+|---|---|
+| `neoletexe_cell_scores.csv` | cell-level programme scores |
+| `neoletexe_cnv_cells.csv` | per-cell CNV scores and malignant calls |
+| `neoletexe_shape.csv` | 220-combination shape table |
+
+**Cross-cohort derivatives**
+
+| File | Role |
+|---|---|
+| `selection_counterfactual_paired.csv`, `selection_counterfactual_patients.csv` | pure-selection counterfactual (Fig. 5D / Fig. 6–7) |
+
+## Why 30 tables, not 15
+
+The internal pre-review checklist named 15 "key input tables" — the tables from which the
+published numbers can be read off directly. That set is included here in full. A fresh
+scan of `R/21`–`R/42` found 21 further tables that those scripts read as inputs; the union
+of the two sets is the 30 files above. The extra tables are what a reviewer needs to
+*rerun* the analysis rather than only inspect its results. Tables written by the scripts
+themselves (for example `depth_matched_summary.csv`, `shape_calibration.csv` and
+`shape_stat_correlation.csv`) are deliberately excluded: they are regenerated by a run.
+
+## Provenance and version
+
+Every file was copied byte-for-byte from `results/tables/` and verified by MD5 at staging
+time; no value was altered. The tables are the same ones used for the published figures,
+including the cohort-2 `iqr` column whose denominator caveat is documented in
+[`../README.md`](../README.md) and in Methods ("Quantifying a displacement").
+
+Cite the archive with the concept DOI `10.5281/zenodo.24106082` (always resolves to the
+latest release) or the exact version tag `v1.0.1`. MIT licensed with the rest of the
+repository.

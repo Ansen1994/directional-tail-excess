@@ -1,0 +1,101 @@
+patient,tp,rcb,response,arm,is_paired,is_last,n_total,n_normal_epi,n_tumor
+P01,T1,RCB 0-I,favorable,Chemo->Combo,yes,,10472,2900,4129
+P01,T2,RCB 0-I,favorable,Chemo->Combo,yes,,5721,553,1024
+P01,T3,RCB 0-I,favorable,Chemo->Combo,yes,yes,8127,26,255
+P01,T4,RCB 0-I,favorable,Chemo->Combo,yes,,0,0,0
+P01,T5,RCB 0-I,favorable,Chemo->Combo,yes,,0,0,0
+P02,T1,RCB II-III,unfavorable,ICI->Combo,,,0,0,0
+P02,T2,RCB II-III,unfavorable,ICI->Combo,,,4670,1090,1570
+P02,T3,RCB II-III,unfavorable,ICI->Combo,,,0,0,0
+P02,T4,RCB II-III,unfavorable,ICI->Combo,,,0,0,0
+P02,T5,RCB II-III,unfavorable,ICI->Combo,,,0,0,0
+P03,T1,RCB II-III,unfavorable,ICI->Combo,,,5784,153,3431
+P03,T2,RCB II-III,unfavorable,ICI->Combo,,,3681,112,1
+P03,T3,RCB II-III,unfavorable,ICI->Combo,,,0,0,0
+P03,T4,RCB II-III,unfavorable,ICI->Combo,,,0,0,0
+P03,T5,RCB II-III,unfavorable,ICI->Combo,,,0,0,0
+P04,T1,RCB II-III,unfavorable,ICI->Combo,,,7698,216,4300
+P04,T2,RCB II-III,unfavorable,ICI->Combo,,,0,0,0
+P04,T3,RCB II-III,unfavorable,ICI->Combo,,,0,0,0
+P04,T4,RCB II-III,unfavorable,ICI->Combo,,,0,0,0
+P04,T5,RCB II-III,unfavorable,ICI->Combo,,,0,0,0
+P06,T1,not shown,unknown,not reported,,,0,0,0
+P06,T2,not shown,unknown,not reported,,,0,0,0
+P06,T3,not shown,unknown,not reported,,,0,0,0
+P06,T4,not shown,unknown,not reported,,,7501,221,466
+P06,T5,not shown,unknown,not reported,,,0,0,0
+P07,T1,RCB 0-I,favorable,Chemo->Combo,,,0,0,0
+P07,T2,RCB 0-I,favorable,Chemo->Combo,,,11293,1,0
+P07,T3,RCB 0-I,favorable,Chemo->Combo,,,6903,415,902
+P07,T4,RCB 0-I,favorable,Chemo->Combo,,,0,0,0
+P07,T5,RCB 0-I,favorable,Chemo->Combo,,,0,0,0
+P08,T1,RCB 0-I,favorable,Chemo->Combo,,,3096,427,387
+P08,T2,RCB 0-I,favorable,Chemo->Combo,,,3325,330,16
+P08,T3,RCB 0-I,favorable,Chemo->Combo,,,3517,881,11
+P08,T4,RCB 0-I,favorable,Chemo->Combo,,,0,0,0
+P08,T5,RCB 0-I,favorable,Chemo->Combo,,,0,0,0
+P09,T1,RCB II-III,unfavorable,ICI->Combo,yes,,6814,166,4348
+P09,T2,RCB II-III,unfavorable,ICI->Combo,yes,,1412,27,867
+P09,T3,RCB II-III,unfavorable,ICI->Combo,yes,yes,6168,136,487
+P09,T4,RCB II-III,unfavorable,ICI->Combo,yes,,0,0,0
+P09,T5,RCB II-III,unfavorable,ICI->Combo,yes,,0,0,0
+P10,T1,RCB II-III,unfavorable,Chemo->Combo,,,0,0,0
+P10,T2,RCB II-III,unfavorable,Chemo->Combo,,,6309,14,5
+P10,T3,RCB II-III,unfavorable,Chemo->Combo,,,0,0,0
+P10,T4,RCB II-III,unfavorable,Chemo->Combo,,,6243,401,2335
+P10,T5,RCB II-III,unfavorable,Chemo->Combo,,,0,0,0
+P12,T1,RCB II-III,unfavorable,ICI->Combo,yes,,7174,1605,1273
+P12,T2,RCB II-III,unfavorable,ICI->Combo,yes,,0,0,0
+P12,T3,RCB II-III,unfavorable,ICI->Combo,yes,yes,4753,1130,295
+P12,T4,RCB II-III,unfavorable,ICI->Combo,yes,,0,0,0
+P12,T5,RCB II-III,unfavorable,ICI->Combo,yes,,0,0,0
+P13,T1,RCB II-III,unfavorable,Chemo->Combo,yes,,4530,734,647
+P13,T2,RCB II-III,unfavorable,Chemo->Combo,yes,,4014,1025,248
+P13,T3,RCB II-III,unfavorable,Chemo->Combo,yes,yes,3917,596,276
+P13,T4,RCB II-III,unfavorable,Chemo->Combo,yes,,0,0,0
+P13,T5,RCB II-III,unfavorable,Chemo->Combo,yes,,0,0,0
+P14,T1,RCB II-III,unfavorable,ICI->Combo,,,0,0,0
+P14,T2,RCB II-III,unfavorable,ICI->Combo,,,3713,425,1263
+P14,T3,RCB II-III,unfavorable,ICI->Combo,,,0,0,0
+P14,T4,RCB II-III,unfavorable,ICI->Combo,,,0,0,0
+P14,T5,RCB II-III,unfavorable,ICI->Combo,,,0,0,0
+P15,T1,RCB 0-I,favorable,Chemo->Combo,,,0,0,0
+P15,T2,RCB 0-I,favorable,Chemo->Combo,,,0,0,0
+P15,T3,RCB 0-I,favorable,Chemo->Combo,,,7594,209,466
+P15,T4,RCB 0-I,favorable,Chemo->Combo,,,2845,709,642
+P15,T5,RCB 0-I,favorable,Chemo->Combo,,,0,0,0
+P16,T1,RCB II-III,unfavorable,Chemo->Combo,yes,,5634,154,1297
+P16,T2,RCB II-III,unfavorable,Chemo->Combo,yes,,0,0,0
+P16,T3,RCB II-III,unfavorable,Chemo->Combo,yes,,0,0,0
+P16,T4,RCB II-III,unfavorable,Chemo->Combo,yes,yes,7689,809,437
+P16,T5,RCB II-III,unfavorable,Chemo->Combo,yes,,7180,1209,488
+P18,T1,RCB II-III,unfavorable,ICI->Combo,yes,,6600,640,2883
+P18,T2,RCB II-III,unfavorable,ICI->Combo,yes,,3995,522,1068
+P18,T3,RCB II-III,unfavorable,ICI->Combo,yes,,5284,892,2000
+P18,T4,RCB II-III,unfavorable,ICI->Combo,yes,yes,9992,2303,1527
+P18,T5,RCB II-III,unfavorable,ICI->Combo,yes,,0,0,0
+P21,T1,RCB II-III,unfavorable,ICI->Combo,,,0,0,0
+P21,T2,RCB II-III,unfavorable,ICI->Combo,,,8878,216,5551
+P21,T3,RCB II-III,unfavorable,ICI->Combo,,,11736,434,8438
+P21,T4,RCB II-III,unfavorable,ICI->Combo,,,0,0,0
+P21,T5,RCB II-III,unfavorable,ICI->Combo,,,0,0,0
+P23,T1,RCB II-III,unfavorable,ICI->Combo,yes,,11573,2217,6390
+P23,T2,RCB II-III,unfavorable,ICI->Combo,yes,yes,5222,852,1490
+P23,T3,RCB II-III,unfavorable,ICI->Combo,yes,,0,0,0
+P23,T4,RCB II-III,unfavorable,ICI->Combo,yes,,0,0,0
+P23,T5,RCB II-III,unfavorable,ICI->Combo,yes,,0,0,0
+P24,T1,RCB II-III,unfavorable,Chemo->Combo,,,6790,3184,1046
+P24,T2,RCB II-III,unfavorable,Chemo->Combo,,,0,0,0
+P24,T3,RCB II-III,unfavorable,Chemo->Combo,,,0,0,0
+P24,T4,RCB II-III,unfavorable,Chemo->Combo,,,0,0,0
+P24,T5,RCB II-III,unfavorable,Chemo->Combo,,,0,0,0
+P26,T1,not shown,unknown,not reported,,,8291,474,2939
+P26,T2,not shown,unknown,not reported,,,0,0,0
+P26,T3,not shown,unknown,not reported,,,0,0,0
+P26,T4,not shown,unknown,not reported,,,0,0,0
+P26,T5,not shown,unknown,not reported,,,0,0,0
+P27,T1,RCB 0-I,favorable,Chemo->Combo,,,3241,7,8
+P27,T2,RCB 0-I,favorable,Chemo->Combo,,,0,0,0
+P27,T3,RCB 0-I,favorable,Chemo->Combo,,,0,0,0
+P27,T4,RCB 0-I,favorable,Chemo->Combo,,,0,0,0
+P27,T5,RCB 0-I,favorable,Chemo->Combo,,,0,0,0

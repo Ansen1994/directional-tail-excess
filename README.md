@@ -1,17 +1,18 @@
 # directional-tail-excess
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24106083.svg)](https://doi.org/10.5281/zenodo.24106083)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24106082.svg)](https://doi.org/10.5281/zenodo.24106082)
 
 Analysis code for the manuscript:
 
-> **A distribution-level test separates subpopulation selection from a population-wide
-> state transition** — Xu A, Chen C, Yin G, Luo J.
+> **Directional tail excess in paired biopsies from three neoadjuvant breast cancer cohorts** — Xu A, Chen C, Yin G, Luo J.
 
 The repository contains the analysis scripts that produce every figure (Fig. 1–7, Fig. S1–S4)
-and every number reported in the paper. It does **not** contain the input data: neither the
-processed single-cell objects nor the derived cell-level tables are distributed here (see
-[Data](#data)). Running the pipeline therefore requires obtaining the controlled-access
-matrices from the three data access committees and regenerating the intermediate tables first.
+and every number reported in the paper, together with the **30 derived input tables** that
+those scripts read (see [`minimum_dataset/`](minimum_dataset/README.md)). It does **not**
+contain the raw or processed single-cell expression matrices: those remain under controlled
+access from the three source data access committees. Stage the shipped tables once into
+`results/tables/` and the figure- and statistics-producing scripts run without any
+controlled-access data (see [Data](#data)).
 
 ---
 
@@ -57,17 +58,24 @@ permutation test and in Fig. 6C. `A` and `asym` are **not** interchangeable.
 | Study | Fu et al., *Nat Commun* 2025 | Bassez et al., *Nat Med* 2021 | Altinönder et al., *Nat Genet* 2026 |
 | Regimen | nab-paclitaxel + pembrolizumab, randomised 2-week single-agent lead-in | single dose anti-PD1 | aromatase inhibition |
 | Access | dbGaP `phs002419.v2` (controlled); processed matrices at Zenodo `10.5281/zenodo.15799565` | EGA `EGAS00001004809` / `EGAD00001006608` (controlled) | EGA `EGAS50000001362` (controlled) |
-| Cell-level tables expected by this code (**not included in this repository**) | `results/tables/nc2025_*.csv` | `results/tables/bassez_*.csv` | `results/tables/neoletexe_*.csv` |
+| Derived input tables (**30 files, shipped in [`minimum_dataset/`](minimum_dataset/README.md)**) | `minimum_dataset/nc2025_*.csv` | `minimum_dataset/bassez_*.csv` | `minimum_dataset/neoletexe_*.csv` |
 
-None of the three cohorts can be redistributed. Access is by application to the original
-data access committees; the code here starts from the processed objects that those
-applications provide. **The cell-level tables in the last row are also not shipped**: they are
-derived from those matrices by `py/` (cohort 1) and by `R/21`, `R/29` and `R/32` (cohorts 2
-and 3). A fresh clone is therefore not runnable as-is — obtain the matrices, regenerate the
-tables in the order given in [`py/README.md`](py/README.md), then invoke `R/00_run_all.R`.
-Paths are relative (`results/tables`, `results/figures`), so the pipeline runs from the
-repository root without editing any absolute path. Most parameters can be overridden by
-environment variable (e.g. `WB_SEED`, `WB_SC_RES_DIR`).
+The three **expression matrices cannot be redistributed**; access is by application to the
+original data access committees. The **derived tables can**: they contain only pseudonymous
+cell-level programme scores, per-cell CNV calls, per-patient quantile/shape summaries and
+derived statistics — no expression matrix, no sequence, no direct identifier. They are
+therefore shipped as the journal's *minimum dataset* in
+[`minimum_dataset/`](minimum_dataset/README.md), copied byte-for-byte from the tables used
+for the published figures and verified by MD5.
+
+After staging them (`mkdir -p results/tables && cp minimum_dataset/*.csv results/tables/`),
+a fresh clone can regenerate every figure and number from `R/21` onward. Only the two
+upstream cohort-3 CNV steps `R/30`/`R/31` still need the controlled matrices
+(`cnv_profile.rds`, `gene_position.csv`); their output `neoletexe_cnv_cells.csv` is shipped,
+so those steps can be skipped. To rebuild the tables from scratch instead, follow
+[`py/README.md`](py/README.md). Paths are relative (`results/tables`, `results/figures`), so
+the pipeline runs from the repository root without editing any absolute path. Most parameters
+can be overridden by environment variable (e.g. `WB_SEED`, `WB_SC_RES_DIR`).
 
 ## Requirements
 
@@ -92,16 +100,20 @@ The runner executes each script in its own R process, writes `logs/run_<tag>.log
 
 Two things are worth knowing before the first run:
 
-1. **The Python layer runs first, and the input tables are not shipped.** `R/00_run_all.R`
-   starts at `R/21` and assumes the cell-level tables listed above already exist. Those are
-   produced by `py/` from the controlled-access matrices; see [`py/README.md`](py/README.md)
-   for the order. `--dry-run` prints the plan without reading any data and will succeed on a
-   fresh clone; a real run stops at the first missing table.
+1. **Stage the shipped tables once.** `R/00_run_all.R` starts at `R/21` and reads from
+   `results/tables/`. Run `mkdir -p results/tables && cp minimum_dataset/*.csv results/tables/`
+   before the first real run; the 30 shipped tables are the derived inputs produced by `py/`
+   (cohort 1) and by `R/21`, `R/29` and `R/32` (cohorts 2 and 3) from the controlled
+   matrices. `--dry-run` prints the plan without reading data. A real run from an empty
+   `results/tables/` stops at the first missing table; to rebuild the tables from scratch
+   instead, obtain the matrices and follow [`py/README.md`](py/README.md).
 2. **`R/28` and `R/39` are mutually dependent.** `R/28` draws Fig. 5D from the per-combination
    counterfactual that `R/39` writes, and `R/39` reads the shape calls that `R/28` writes.
-   With the tables present, one pass is enough; from an empty `results/tables`, the first
-   `R/28` run stops at the counterfactual read — this is expected, and the runner places a
-   second `R/28` at the end of the plan so that `--from=38` completes it.
+   With the tables staged, one pass is enough: `selection_counterfactual_paired.csv` and
+   `nc2025_fig5_shape_calls.csv` are both shipped, so neither script lacks an input. If you
+   deliberately rebuild from an empty `results/tables`, the first `R/28` run stops at the
+   counterfactual read — this is expected, and the runner places a second `R/28` at the end
+   of the plan so that `--from=38` completes it.
 
 ## Code map
 
@@ -161,17 +173,18 @@ only by that layer. They are kept for lineage; nothing in the manuscript depends
 Citation metadata is in [`CITATION.cff`](CITATION.cff). If you use this code, please cite the
 manuscript and the archived release.
 
-**This version (v1.0.0)** — use this when you need to refer to exactly the code behind the
-manuscript:
+**Cite the archive with the concept DOI** — `10.5281/zenodo.24106082` always resolves to the
+latest release, so a data/code availability statement written against it stays valid as the
+repository is updated:
 
 > Xu A, Chen C, Yin G, Luo J. *directional-tail-excess: a distribution-level test separating
-> subpopulation selection from a population-wide state transition* (v1.0.0). Zenodo. 2026.
-> doi:10.5281/zenodo.24106083
+> subpopulation selection from a population-wide state transition* (v1.0.1). Zenodo. 2026.
+> doi:10.5281/zenodo.24106082
 
-**Concept DOI** — `10.5281/zenodo.24106082`. This always resolves to the latest release, so use
-it in a "code availability" statement that should stay valid as the repository is updated.
-
-Archived snapshot: <https://zenodo.org/records/24106083>
+**Exact version** — tag `v1.0.1` in this repository pins the code and the 30 shipped tables
+behind the manuscript. The concept DOI above resolves to that version; Zenodo additionally
+mints a version-specific DOI when the release is published.
+Archived record: <https://zenodo.org/records/24106082>.
 
 ## License
 

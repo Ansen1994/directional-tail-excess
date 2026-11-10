@@ -1,0 +1,8 @@
+patient,mp,rcb,arm,verdict,n_base,n_post,n_clone_base,n_clone_post,med_base,med_post,obs_delta,cf_delta,cf_share,cf_lo,cf_hi,note
+01,MP5,favorable,Chemo,composition_minor,4129,237,5,3,0.4349,2.2746,1.8397,0.0009,0.000,-0.0465,0.0426,
+09,MP7,unfavorable,ICI,composition_partial,4348,487,6,4,2.3698,2.7987,0.4289,0.0982,0.229,0.0581,0.1409,
+12,,,,not_testable,,,,,,,,,,,,不可分层
+13,MP3,unfavorable,Chemo,composition_minor,647,276,4,3,0.0859,0.3817,0.2958,-0.0111,-0.037,-0.0333,0.0150,
+16,MP3,unfavorable,Chemo,composition_minor,1297,437,4,2,-0.1469,0.9360,1.0830,-0.0035,-0.003,-0.0146,0.0095,
+18,MP9,unfavorable,ICI,composition_minor,2883,1527,5,3,1.0033,1.6899,0.6866,0.0550,0.080,0.0352,0.0790,
+23,MP7,unfavorable,ICI,composition_minor,6390,1490,6,5,1.9780,2.9586,0.9806,0.0116,0.012,-0.0082,0.0327,

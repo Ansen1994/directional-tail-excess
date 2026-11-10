@@ -52,7 +52,8 @@ Run logs (`*.log`) are not shipped.
 were run as separate R processes at different times, and their per-step `sessionInfo()`
 files were not archived. A full reproduction generates them: `R/00_run_all.R` writes
 `logs/sessionInfo_<tag>.txt` and `logs/run_<tag>.log` after each step. The cell-level input
-tables needed to start that run are likewise not shipped (see [README](README.md#data)).
+tables needed to start that run are now shipped in `minimum_dataset/`
+(see [README](README.md#data) and [minimum dataset notes](minimum_dataset/README.md)).
 
 ## Conventions that must not drift
 
