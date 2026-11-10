@@ -90,6 +90,13 @@ for (pt in unique(cs$patient)) {
     if (length(pre) < MIN_CELLS || length(on) < MIN_CELLS) next
     qb <- quantile(pre, QS, type = 7, names = FALSE)
     qa <- quantile(on, QS, type = 7, names = FALSE)
+    # 口径说明（勿改本行）：qb = quantile(pre, QS)，QS = c(.10,.25,.50,.75,.90)，
+    # 因此 qb[3]-qb[1] 是 Q50-Q10，不是基线 IQR。标准 IQR 应为 qb[4]-qb[2]
+    # (Q75-Q25)，队列 3 的 R/32 与队列 1 的 py/11 用的正是这一取法。
+    # 本行有意保留原值，因为已发表图由该表绘制；偏差与后果已在稿件 Methods
+    # 「Quantifying a displacement」及本仓库 README「Cohort 2 denominator」中声明。
+    # 若改用标准 IQR，|z50|>0.5 将由 38/145 变为 29/145，须同步重跑 R/39、
+    # R/41、R/42 并重绘 Fig. 6-7。
     iqr <- qb[3] - qb[1]
     if (!is.finite(iqr) || iqr <= 0) next
     d50 <- (qa[3] - qb[3]) / iqr

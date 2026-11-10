@@ -7,11 +7,11 @@ Analysis code for the manuscript:
 > **A distribution-level test separates subpopulation selection from a population-wide
 > state transition** — Xu A, Chen C, Yin G, Luo J.
 
-The repository contains the pipeline that produces every figure (Fig. 1–7, Fig. S1–S4) and
-every number reported in the paper, from the processed single-cell objects of three
-independent neoadjuvant cohorts.
-
-Raw and processed sequencing data are **not** redistributed here; see [Data](#data).
+The repository contains the analysis scripts that produce every figure (Fig. 1–7, Fig. S1–S4)
+and every number reported in the paper. It does **not** contain the input data: neither the
+processed single-cell objects nor the derived cell-level tables are distributed here (see
+[Data](#data)). Running the pipeline therefore requires obtaining the controlled-access
+matrices from the three data access committees and regenerating the intermediate tables first.
 
 ---
 
@@ -19,7 +19,8 @@ Raw and processed sequencing data are **not** redistributed here; see [Data](#da
 
 For every **patient × programme × interval**, cells are scored, quantiles of the score are
 taken before and after treatment, and the post-treatment quantiles are divided by the
-**baseline IQR of that same patient and programme**, so that all quantities are in units of
+**baseline IQR of that same patient and programme** (cohorts 1 and 3; cohort 2 differs — see
+[Cohort 2 denominator](#reproducibility-notes) below), so that all quantities are in units of
 one baseline IQR and are comparable across patients and cohorts.
 
 | Quantity | Definition | Used for |
@@ -56,13 +57,17 @@ permutation test and in Fig. 6C. `A` and `asym` are **not** interchangeable.
 | Study | Fu et al., *Nat Commun* 2025 | Bassez et al., *Nat Med* 2021 | Altinönder et al., *Nat Genet* 2026 |
 | Regimen | nab-paclitaxel + pembrolizumab, randomised 2-week single-agent lead-in | single dose anti-PD1 | aromatase inhibition |
 | Access | dbGaP `phs002419.v2` (controlled); processed matrices at Zenodo `10.5281/zenodo.15799565` | EGA `EGAS00001004809` / `EGAD00001006608` (controlled) | EGA `EGAS50000001362` (controlled) |
-| Cell-level tables expected by this code | `results/tables/nc2025_*.csv` | `results/tables/bassez_*.csv` | `results/tables/neoletexe_*.csv` |
+| Cell-level tables expected by this code (**not included in this repository**) | `results/tables/nc2025_*.csv` | `results/tables/bassez_*.csv` | `results/tables/neoletexe_*.csv` |
 
 None of the three cohorts can be redistributed. Access is by application to the original
 data access committees; the code here starts from the processed objects that those
-applications provide. Paths are relative (`results/tables`, `results/figures`), so the
-pipeline runs from the repository root without editing any absolute path. Most parameters
-can be overridden by environment variable (e.g. `WB_SEED`, `WB_SC_RES_DIR`).
+applications provide. **The cell-level tables in the last row are also not shipped**: they are
+derived from those matrices by `py/` (cohort 1) and by `R/21`, `R/29` and `R/32` (cohorts 2
+and 3). A fresh clone is therefore not runnable as-is — obtain the matrices, regenerate the
+tables in the order given in [`py/README.md`](py/README.md), then invoke `R/00_run_all.R`.
+Paths are relative (`results/tables`, `results/figures`), so the pipeline runs from the
+repository root without editing any absolute path. Most parameters can be overridden by
+environment variable (e.g. `WB_SEED`, `WB_SC_RES_DIR`).
 
 ## Requirements
 
@@ -87,9 +92,11 @@ The runner executes each script in its own R process, writes `logs/run_<tag>.log
 
 Two things are worth knowing before the first run:
 
-1. **The Python layer runs first.** `R/00_run_all.R` starts at `R/21` and assumes the
-   cell-level tables listed above already exist. Those are produced by `py/`; see
-   [`py/README.md`](py/README.md) for the order.
+1. **The Python layer runs first, and the input tables are not shipped.** `R/00_run_all.R`
+   starts at `R/21` and assumes the cell-level tables listed above already exist. Those are
+   produced by `py/` from the controlled-access matrices; see [`py/README.md`](py/README.md)
+   for the order. `--dry-run` prints the plan without reading any data and will succeed on a
+   fresh clone; a real run stops at the first missing table.
 2. **`R/28` and `R/39` are mutually dependent.** `R/28` draws Fig. 5D from the per-combination
    counterfactual that `R/39` writes, and `R/39` reads the shape calls that `R/28` writes.
    With the tables present, one pass is enough; from an empty `results/tables`, the first
@@ -135,12 +142,16 @@ only by that layer. They are kept for lineage; nothing in the manuscript depends
   `B = 1000`, so the smallest attainable value is `1/1001` and no p-value is ever reported
   as zero.
 * **Cohort 2 denominator.** `bassez_v2_profile.csv` normalises every `z` value by the column
-  `iqr`, which is *not* equal to the baseline `q75 − q25` (ratio 0.48–3.28, median 1.22).
-  Signs, directions and patient-level agreement are unaffected by a positive rescaling, and
-  the column is retained so that the deposited tables match the published figures. The
-  consequences are measurable and stated in the paper: `disp = 1 + asym` does not hold row-wise
-  for cohort 2, and recomputing with the standard IQR would move the `|z50| > 0.5` count from
-  38/145 to 29/145. Changing it requires editing three scripts in step and redrawing Fig. 6–7.
+  `iqr`, which is *not* equal to the baseline `q75 − q25` (ratio 0.48–3.28, median 1.22, and
+  not constant across combinations). Signs, directions, within-combination ratios and
+  patient-level agreement are unaffected by this positive rescaling, but counts defined by an
+  absolute cut-off change: recomputing with the standard IQR would move the `|z50| > 0.5`
+  count from 38/145 to 29/145, and `disp = 1 + asym` does not hold row-wise for cohort 2.
+  **This caveat and its consequence are stated in the paper**, in Methods,
+  "Quantifying a displacement". The column is retained unchanged because the published
+  figures were drawn from it; the line that produces it is annotated in
+  `R/29_fig6_external.R`. Changing it requires editing three scripts in step and redrawing
+  Fig. 6–7.
 * Cohort 3's CNV caller is written in base R (`R/31_neoletexe_cnv.R`) from the arm-level
   procedure rather than taken from a package, so its behaviour is documented in Methods
   rather than by a version number.
